@@ -7,6 +7,6 @@ while ($true) {
         $hashtable.($data[$i]) = $data[$i + 1]
     }
 
-    [PSCustomObject] $hashtable | Export-Csv -Path Data.txt -Append
+    [PSCustomObject] $hashtable | Export-Csv -Path Data.csv -Append
     Start-Sleep -Seconds 30
 }
