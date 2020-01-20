@@ -1,14 +1,27 @@
 # Technicolor VDSL Modem Stat Scraper
 
-Install dependencies with:
-pip install -U -r requirements.txt
+On Mac:
+```
+pip3 install -U -r requirements.txt
+brew cask install powershell
+```
 
-Please edit the top of settings.py for the IP/Username/Password as required.
+Please edit the top of settings.py for the IP/Username/Password and test it out:
+```
+python3 modem-technicolour-httpstats.py
+```
 
-On Windows the result will be saved to a file and opened in your default text editor.
-On other OSes it will be printed to stdout.
+If it works then you can begin appending data collection to a CSV every 30 seconds.
 
-Example output:
-{'us': '20.94', 'ds': '61.08', 'uploaded': '866.77', 'downloaded': '2167.99'}
+```
+pwsh -File DataCollection.ps1
+```
 
-If authentication fails, a full exception trace and debug output for the SRP6 authentication will be displayed.
+Ctrl-C to exit.
+
+Sample data:
+```
+"Date","DSL Status","DSL Uptime","DSL Type","DSL Mode","Maximum Line rate","Line Rate","Data Transferred","Output Power","Line Attenuation","Noise Margin"
+"2020-01-20T13:03:35.5726860+08:00","Up","5 hours 24 minutes 23 seconds","VDSL2","Fast","19.34 Mbps 34.98 Mbps","19.01 Mbps 36.18 Mbps","5262.7 MBytes 30774 MBytes","9.4 dBm 14.5 dBm","17.1, 38.9, 54.6 dB 21.5, 46.3, 68.9 dB","6.8 dB 5.6 dB"
+"2020-01-20T13:04:07.7872100+08:00","Up","5 hours 24 minutes 55 seconds","VDSL2","Fast","19.34 Mbps 35.18 Mbps","19.01 Mbps 36.18 Mbps","5262.94 MBytes 30774.32 MBytes","9.4 dBm 14.5 dBm","17.1, 38.9, 54.6 dB 21.5, 46.3, 68.9 dB","6.9 dB 5.7 dB"
+```
