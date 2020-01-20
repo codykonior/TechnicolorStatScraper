@@ -62,24 +62,9 @@ def getStats(host, username, password, statsUrl):
     h.body_width = 999
     body = h.handle(r.content.decode())
     body = body[body.find('DSL Status'):body.find('Close')]
-    body = body.replace("_", "").replace("\n", " ")
-    # print(body) # uncomment this to get the raw data to use on regexr.com along with the expression from the next line
-    rex = re.compile(r'(?:  Line Rate\ +)(?P<us>[0-9\.]+)(?: Mbps )(?P<ds>[0-9\.]+)(?: Mbps\ *)(?:Data Transferred\ +)(?P<uploaded>[0-9\.]+)(?: .Bytes )(?P<downloaded>[0-9\.]+)(?: .Bytes )')
-    m = rex.search(body)
-    data = m.groupdict()
-    return data
-
+    body = body.replace("_", "")
+    return body
 
 if __name__ == "__main__":
     data = getStats(host, username, password, statsUrl)
-    
-    # You can add your own custom printing code here and extract entries
     print(data)
-    
-    # Save and open in default text editor if you are on windows
-    if sys.platform.startswith("win"):
-        outfile = os.path.join(os.environ['TEMP'], 'modemstats.txt')
-        out = open(outfile, 'w+')
-        out.write(str(data))
-        out.close()
-        os.startfile(outfile)
